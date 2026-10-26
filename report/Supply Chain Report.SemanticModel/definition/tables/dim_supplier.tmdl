@@ -1,0 +1,52 @@
+table dim_supplier
+	lineageTag: 4f747ff6-58ea-4d80-b139-c32e7a6c73da
+
+	column supplier_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4bd1ba6b-55ad-446b-ba06-536ec9a3b229
+		summarizeBy: none
+		sourceColumn: supplier_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column supplier_name
+		dataType: string
+		lineageTag: e140d445-f239-462b-b3dd-b53671972b98
+		summarizeBy: none
+		sourceColumn: supplier_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		lineageTag: 1aee5e4a-bdc1-43a0-979d-4a8ea57aab79
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column std_lead_time_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e7f916e-634c-47e9-9e17-34e5b013fd57
+		summarizeBy: none
+		sourceColumn: std_lead_time_days
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_supplier = m
+		mode: import
+		source =
+				let
+				  Source = Csv.Document(File.Contents("D:\Project\supply-chain-powerbi\supply-chain-powerbi\data\out\dim_supplier.csv"), [Delimiter = ",", Columns = 4, QuoteStyle = QuoteStyle.None]),
+				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"supplier_key", Int64.Type}, {"supplier_name", type text}, {"country", type text}, {"std_lead_time_days", Int64.Type}}, "en-US")
+				in
+				  #"Changed column type"
+
+	annotation PBI_ResultType = Table
+

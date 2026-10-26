@@ -1,0 +1,73 @@
+table fact_inventory_daily
+	lineageTag: 969d37ec-d62b-4601-b9d6-542e4a0713b6
+
+	column date_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 129407a7-f48c-41af-a6ea-bd9f0706b2bb
+		summarizeBy: none
+		sourceColumn: date_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6f0e83bf-28e8-43f5-aff6-251a8c7c3f48
+		summarizeBy: none
+		sourceColumn: product_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 20fcc154-9e56-4e96-8346-d5e265962226
+		summarizeBy: none
+		sourceColumn: location_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column on_hand_qty
+		dataType: int64
+		formatString: 0
+		lineageTag: 2a2bd99c-0f78-4f6d-8801-aeb59981c97c
+		summarizeBy: sum
+		sourceColumn: on_hand_qty
+
+		annotation SummarizationSetBy = Automatic
+
+	column on_hand_value
+		dataType: double
+		isHidden
+		lineageTag: 29162156-c211-4029-b943-79b225421530
+		summarizeBy: sum
+		sourceColumn: on_hand_value
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition fact_inventory_daily = m
+		mode: import
+		source =
+				let
+				  Source = Csv.Document(File.Contents("D:\Project\supply-chain-powerbi\supply-chain-powerbi\data\out\fact_inventory_daily.csv"), [Delimiter = ",", Columns = 5, QuoteStyle = QuoteStyle.None]),
+				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"date_key", Int64.Type}, {"product_key", Int64.Type}, {"location_key", Int64.Type}, {"on_hand_qty", Int64.Type}, {"on_hand_value", type number}}, "en-US")
+				in
+				  #"Changed column type"
+
+	annotation PBI_ResultType = Table
+

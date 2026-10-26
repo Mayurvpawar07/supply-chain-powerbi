@@ -1,0 +1,43 @@
+table dim_location
+	lineageTag: 78bd1876-095a-4696-bb72-e8a0fb254a3a
+
+	column location_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 461abb4d-bade-4d4d-9566-dc358210f999
+		summarizeBy: none
+		sourceColumn: location_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_name
+		dataType: string
+		lineageTag: 29c03523-2443-45b7-b0b1-6bfb68cce48f
+		summarizeBy: none
+		sourceColumn: location_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column location_type
+		dataType: string
+		lineageTag: 09593409-aa52-4097-870a-06ff80c05054
+		summarizeBy: none
+		sourceColumn: location_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_location = m
+		mode: import
+		source =
+				let
+				  Source = Csv.Document(File.Contents("D:\Project\supply-chain-powerbi\supply-chain-powerbi\data\out\dim_location.csv"), [Delimiter = ",", Columns = 3, QuoteStyle = QuoteStyle.None]),
+				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"location_key", Int64.Type}, {"location_name", type text}, {"location_type", type text}}, "en-US")
+				in
+				  #"Changed column type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,25 @@
+model Model
+	culture: en-CA
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-CA
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["dim_date","dim_location","dim_product","dim_supplier","fact_inventory_daily","fact_po_lines","_Measures"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_date
+ref table dim_location
+ref table dim_product
+ref table dim_supplier
+ref table fact_inventory_daily
+ref table fact_po_lines
+ref table _Measures
+
+ref cultureInfo en-CA
+

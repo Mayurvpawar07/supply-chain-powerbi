@@ -1,0 +1,24 @@
+{
+  "name": "Supply Chain Clean",
+  "dataColors": ["#1F4E79", "#2E86AB", "#F18F01", "#C73E1D", "#6C757D", "#3B9C77", "#8E6C8A", "#B5B5B5"],
+  "background": "#FFFFFF",
+  "foreground": "#1B1F23",
+  "tableAccent": "#1F4E79",
+  "good": "#3B9C77",
+  "neutral": "#F18F01",
+  "bad": "#C73E1D",
+  "textClasses": {
+    "title": {"fontFace": "Segoe UI Semibold", "fontSize": 12, "color": "#1B1F23"},
+    "label": {"fontFace": "Segoe UI", "fontSize": 10, "color": "#4A5560"},
+    "callout": {"fontFace": "Segoe UI Semibold", "fontSize": 28, "color": "#1F4E79"},
+    "header": {"fontFace": "Segoe UI Semibold", "fontSize": 11, "color": "#1B1F23"}
+  },
+  "visualStyles": {
+    "*": {"*": {
+      "title": [{"show": true, "fontSize": 12, "fontColor": {"solid": {"color": "#1B1F23"}}}],
+      "border": [{"show": false}],
+      "background": [{"show": true, "color": {"solid": {"color": "#FFFFFF"}}, "transparency": 0}]
+    }},
+    "page": {"*": {"background": [{"color": {"solid": {"color": "#F4F6F8"}}, "transparency": 0}]}}
+  }
+}

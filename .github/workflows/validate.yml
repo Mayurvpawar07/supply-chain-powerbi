@@ -1,0 +1,14 @@
+name: validate
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install pandas numpy
+      - name: Validate theme, measures, repo hygiene
+        run: python tools/validate.py
+      - name: Data generator smoke test
+        run: python data/generate_data.py --inventory-rows 5000 --po-lines 2000

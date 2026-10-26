@@ -1,0 +1,55 @@
+// ============================================================
+// Measures for the portfolio model. Add via Model view > New measure
+// (or Tabular Editor). "SLOW" variants are the BEFORE state for the
+// tuning write-up; "FAST" variants are the AFTER state.
+// Do not claim speedups until you have measured them (docs/TUNING_LOG.md).
+// ============================================================
+
+// ---------- Core (use these on the report) ----------
+PO Lines = COUNTROWS ( fact_po_lines )
+On-Time % = DIVIDE ( SUM ( fact_po_lines[is_on_time] ), [PO Lines] )
+In-Full % = DIVIDE ( SUM ( fact_po_lines[is_in_full] ), [PO Lines] )
+OTIF % =
+DIVIDE (
+    CALCULATE ( [PO Lines], fact_po_lines[is_on_time] = 1, fact_po_lines[is_in_full] = 1 ),
+    [PO Lines]
+)
+Spend = SUMX ( fact_po_lines, fact_po_lines[qty_received] * fact_po_lines[unit_cost] )
+Inventory Value = SUM ( fact_inventory_daily[on_hand_value] )
+
+// ---------- BEFORE (SLOW) ----------
+// Row-by-row iterator + RELATED over a multi-million row table
+Inventory Value (SLOW) =
+SUMX (
+    fact_inventory_daily,
+    fact_inventory_daily[on_hand_qty] * RELATED ( dim_product[unit_cost] )
+)
+
+// FILTER over the whole fact table instead of a column predicate
+OTIF % (SLOW) =
+DIVIDE (
+    COUNTROWS (
+        FILTER (
+            fact_po_lines,
+            fact_po_lines[received_date_key] <= fact_po_lines[promised_date_key]
+                && fact_po_lines[qty_received] >= fact_po_lines[qty_ordered]
+        )
+    ),
+    COUNTROWS ( fact_po_lines )
+)
+
+// Repeated sub-expressions, no variables
+Inventory Value vs PY (SLOW) =
+DIVIDE (
+    CALCULATE ( SUMX ( fact_inventory_daily, fact_inventory_daily[on_hand_qty] * RELATED ( dim_product[unit_cost] ) ), DATEADD ( dim_date[date], -1, YEAR ) ),
+    CALCULATE ( SUMX ( fact_inventory_daily, fact_inventory_daily[on_hand_qty] * RELATED ( dim_product[unit_cost] ) ) )
+) - 1
+
+// ---------- AFTER (FAST) ----------
+// Value pre-computed in the data load; measure is a simple SUM
+// (Inventory Value above)
+// Flags pre-computed; boolean CALCULATE filters (OTIF % above)
+Inventory Value vs PY =
+VAR _cur = [Inventory Value]
+VAR _py  = CALCULATE ( [Inventory Value], DATEADD ( dim_date[date], -1, YEAR ) )
+RETURN DIVIDE ( _cur, _py ) - 1

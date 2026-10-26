@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Supply Chain Report"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "094b74a2-9f8e-48f3-a7f8-ded6ffd860da"
+  }
+}

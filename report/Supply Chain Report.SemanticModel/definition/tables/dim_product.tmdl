@@ -1,0 +1,64 @@
+table dim_product
+	lineageTag: 2e05ce2f-8a0b-4235-abf4-46f7017872cc
+
+	column product_key
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 04ce9a36-a94f-4549-a747-c5826dedd9cd
+		summarizeBy: none
+		sourceColumn: product_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku
+		dataType: string
+		lineageTag: d32d351c-4ca5-43a4-93ad-0d31da5d52e4
+		summarizeBy: none
+		sourceColumn: sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: f27fe66f-5f96-4f2e-8947-96558de5ee46
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_cost
+		dataType: double
+		isHidden
+		lineageTag: 8aed41e5-3d4f-4fb3-b48b-69ca196bc0aa
+		summarizeBy: sum
+		sourceColumn: unit_cost
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column abc_class
+		dataType: string
+		lineageTag: 7afe2d29-7f73-42d4-b31f-68be4cc77323
+		summarizeBy: none
+		sourceColumn: abc_class
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_product = m
+		mode: import
+		source =
+				let
+				  Source = Csv.Document(File.Contents("D:\Project\supply-chain-powerbi\supply-chain-powerbi\data\out\dim_product.csv"), [Delimiter = ",", Columns = 5, QuoteStyle = QuoteStyle.None]),
+				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
+				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"product_key", Int64.Type}, {"sku", type text}, {"category", type text}, {"unit_cost", type number}, {"abc_class", type text}}, "en-US")
+				in
+				  #"Changed column type"
+
+	annotation PBI_ResultType = Table
+

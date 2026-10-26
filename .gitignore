@@ -1,0 +1,8 @@
+# Power BI local/cache files - never commit
+*.pbix
+**/.pbi/cache.abf
+**/.pbi/localSettings.json
+# generated data (rebuild with data/generate_data.py)
+data/out/
+__pycache__/
+.DS_Store
