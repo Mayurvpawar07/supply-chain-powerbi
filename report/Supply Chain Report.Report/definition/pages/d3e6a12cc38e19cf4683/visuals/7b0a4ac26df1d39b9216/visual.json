@@ -1,0 +1,140 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "7b0a4ac26df1d39b9216",
+  "position": {
+    "x": 24,
+    "y": 488,
+    "z": 0,
+    "height": 208,
+    "width": 1232,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_location"
+                    }
+                  },
+                  "Property": "location_name"
+                }
+              },
+              "queryRef": "dim_location.location_name",
+              "nativeQueryRef": "location_name"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "PO Lines"
+                }
+              },
+              "queryRef": "_Measures.PO Lines",
+              "nativeQueryRef": "PO Lines"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "OTIF %"
+                }
+              },
+              "queryRef": "_Measures.OTIF %",
+              "nativeQueryRef": "OTIF %"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Spend"
+                }
+              },
+              "queryRef": "_Measures.Spend",
+              "nativeQueryRef": "Spend"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "28b92db07854b9132676",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_location"
+              }
+            },
+            "Property": "location_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "e73cc2e55ab6bb4ba82e",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "PO Lines"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "64b4d184fc59f63c1709",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "OTIF %"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a5699ca041d72cf4b975",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Spend"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

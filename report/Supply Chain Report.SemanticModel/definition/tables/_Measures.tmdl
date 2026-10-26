@@ -6,14 +6,12 @@ table _Measures
 		lineageTag: 6acf1536-6af7-4ae5-861a-c91ce0f40578
 
 	measure 'On-Time %' = DIVIDE ( SUM ( fact_po_lines[is_on_time] ), [PO Lines] )
+		formatString: 0.0%;-0.0%;0.0%
 		lineageTag: 9b8b0867-f600-4add-b002-f26cd88d50c8
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	measure 'In-Full %' = DIVIDE ( SUM ( fact_po_lines[is_in_full] ), [PO Lines] )
+		formatString: 0.0%;-0.0%;0.0%
 		lineageTag: 154aecc8-6d7d-460c-8d77-f402b259c181
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'OTIF %' =
 			
@@ -21,19 +19,16 @@ table _Measures
 			    CALCULATE ( [PO Lines], fact_po_lines[is_on_time] = 1, fact_po_lines[is_in_full] = 1 ),
 			    [PO Lines]
 			)
+		formatString: 0.0%;-0.0%;0.0%
 		lineageTag: e8788196-8fce-4aa7-becf-e206eae00f77
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	measure Spend = SUMX ( fact_po_lines, fact_po_lines[qty_received] * fact_po_lines[unit_cost] )
+		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: 34bd0816-65d7-4a99-a135-f2af70e72199
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	measure 'Inventory Value' = SUM ( fact_inventory_daily[on_hand_value] )
+		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: 0550f1f7-1e8c-441e-99ea-a3d03c9b1033
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Inventory Value (SLOW)' =
 			
@@ -41,9 +36,8 @@ table _Measures
 			    fact_inventory_daily,
 			    fact_inventory_daily[on_hand_qty] * RELATED ( dim_product[unit_cost] )
 			)
+		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: 265b5b74-0a46-43aa-b126-383545b95db8
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'OTIF % (SLOW)' =
 			
@@ -57,9 +51,8 @@ table _Measures
 			    ),
 			    COUNTROWS ( fact_po_lines )
 			)
+		formatString: 0.0%;-0.0%;0.0%
 		lineageTag: b706ab6a-f3d1-4129-bd08-8b031ec73f25
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Inventory Value vs PY (SLOW)' =
 			
@@ -67,18 +60,16 @@ table _Measures
 			    CALCULATE ( SUMX ( fact_inventory_daily, fact_inventory_daily[on_hand_qty] * RELATED ( dim_product[unit_cost] ) ), DATEADD ( dim_date[date], -1, YEAR ) ),
 			    CALCULATE ( SUMX ( fact_inventory_daily, fact_inventory_daily[on_hand_qty] * RELATED ( dim_product[unit_cost] ) ) )
 			) - 1
+		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: 23ba8297-b9c6-40ba-aa16-06404022e66a
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Inventory Value vs PY' =
 			
 			VAR _cur = [Inventory Value]
 			VAR _py  = CALCULATE ( [Inventory Value], DATEADD ( dim_date[date], -1, YEAR ) )
 			RETURN DIVIDE ( _cur, _py ) - 1
+		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: 1f7ffe28-53fb-4b6f-8dd5-863681257a5e
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column Column1
 		dataType: string
