@@ -7,16 +7,18 @@ Use VertiPaq Analyzer (DAX Studio > Advanced > View Metrics) for model size.
 **Rule:** write only numbers you measured. Never edit results to look better.
 
 ## Environment
-- Rows: fact_inventory_daily = ____ , fact_po_lines = ____
-- Power BI Desktop version: ____  Machine: ____
+- Rows: fact_inventory_daily = 1,800,000 , fact_po_lines = 400,000
+- Power BI Desktop version: 2.159.883.0 64-bit (October, 2026)  Machine: Yoga 7 14IRL8 16 GB RAM
 
 ## Baseline (BEFORE)
 | Visual / measure | DAX duration (ms) | Storage engine queries | Notes |
 |---|---|---|---|
-| Inventory Value (SLOW) by category | | | SUMX + RELATED |
-| OTIF % (SLOW) by month | | | FILTER over fact table |
-| Inventory Value vs PY (SLOW) | | | repeated expressions |
-Model size (VertiPaq): ____ MB. Top 3 columns by size: ____
+| Inventory Value (SLOW) by category | 295 | 3 | SUMX + RELATED |
+| OTIF % (SLOW) by month | 13 | 3 | FILTER over fact table |
+| Inventory Value vs PY (SLOW) | 35 | 3 | repeated expressions |
+Model size (VertiPaq): 20.56 MB. Top 3 columns by size: on_hand_value, product_key, po_line_id
+
+Evidence: docs/perf/baseline.json, docs/img/baseline-timings.png
 
 ## Changes (one commit each)
 1. Pre-compute `on_hand_value`; measure becomes `SUM`.
