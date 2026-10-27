@@ -76,5 +76,65 @@
       }
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "41b33ef0f8c62a0fb200",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_location"
+              }
+            },
+            "Property": "location_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "75f4dae0784c362c5e7e",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "PO Lines"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f12f52fc8d8d48af351d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "OTIF %"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "3ec3b66ee7a335b4e11a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Spend"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }

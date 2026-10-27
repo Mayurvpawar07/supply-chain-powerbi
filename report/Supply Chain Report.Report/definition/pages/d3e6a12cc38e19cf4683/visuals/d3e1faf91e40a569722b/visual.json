@@ -67,6 +67,11 @@
         }
       ]
     },
+    "syncGroup": {
+      "groupName": "location_name",
+      "fieldChanges": true,
+      "filterChanges": true
+    },
     "drillFilterOtherVisuals": true
   }
 }
