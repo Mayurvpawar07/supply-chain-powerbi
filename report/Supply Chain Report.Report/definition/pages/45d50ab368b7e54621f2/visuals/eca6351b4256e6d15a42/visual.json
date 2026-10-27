@@ -5,7 +5,7 @@
     "x": 24,
     "y": 192,
     "z": 6000,
-    "height": 280,
+    "height": 248,
     "width": 760,
     "tabOrder": 6000
   },
@@ -70,6 +70,13 @@
         "isDefaultSort": true
       }
     },
+    "objects": {
+      "valueAxis": [
+        {
+          "properties": {}
+        }
+      ]
+    },
     "visualContainerObjects": {
       "title": [
         {
@@ -77,7 +84,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Inventory value by month'"
+                  "Value": "'Inventory value by month (axis not zero-based)'"
                 }
               }
             }

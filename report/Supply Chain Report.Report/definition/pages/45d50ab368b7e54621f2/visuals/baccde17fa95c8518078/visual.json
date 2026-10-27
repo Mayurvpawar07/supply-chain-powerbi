@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "_Measures.Inventory Value",
-              "nativeQueryRef": "Inventory Value"
+              "nativeQueryRef": "Inventory Value",
+              "format": "\\$#,0.0;-\\$#,0.0;\\$#,0.0"
             }
           ]
         }

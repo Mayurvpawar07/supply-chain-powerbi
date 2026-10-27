@@ -5,7 +5,7 @@
     "x": 800,
     "y": 192,
     "z": 7000,
-    "height": 280,
+    "height": 248,
     "width": 456,
     "tabOrder": 7000
   },
@@ -213,6 +213,19 @@
                 }
               }
             ]
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "gridlineShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
           }
         }
       ]

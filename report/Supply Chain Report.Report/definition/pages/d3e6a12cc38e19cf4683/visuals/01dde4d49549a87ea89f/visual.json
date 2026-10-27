@@ -70,6 +70,13 @@
         "isDefaultSort": true
       }
     },
+    "objects": {
+      "valueAxis": [
+        {
+          "properties": {}
+        }
+      ]
+    },
     "visualContainerObjects": {
       "general": [
         {
