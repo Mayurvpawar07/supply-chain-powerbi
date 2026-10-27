@@ -4,7 +4,7 @@
   "position": {
     "x": 24,
     "y": 192,
-    "z": 8,
+    "z": 8000,
     "height": 280,
     "width": 760,
     "tabOrder": 8000
@@ -77,7 +77,33 @@
             "altText": {
               "expr": {
                 "Literal": {
-                  "Value": "'Line chart of OTIF % by month'"
+                  "Value": "'Line chart of OTIF % by month, rising from 65% to 70%'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'OTIF % by month'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
@@ -86,37 +112,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "e578053ae1ae43c4d5a0",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_date"
-              }
-            },
-            "Property": "year_month"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "e80547fd771f649d1bbb",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "OTIF %"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

@@ -26,16 +26,21 @@ table _Measures
 		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: 34bd0816-65d7-4a99-a135-f2af70e72199
 
-	measure 'Inventory Value' = SUM ( fact_inventory_daily[on_hand_value] )
+	measure 'Inventory Value' =
+			
+			VAR _d = MAX ( fact_inventory_daily[date_key] )
+			RETURN CALCULATE ( SUM ( fact_inventory_daily[on_hand_value] ), fact_inventory_daily[date_key] = _d )
 		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: 0550f1f7-1e8c-441e-99ea-a3d03c9b1033
 
 	measure 'Inventory Value (SLOW)' =
 			
-			SUMX (
-			    fact_inventory_daily,
-			    fact_inventory_daily[on_hand_qty] * RELATED ( dim_product[unit_cost] )
-			)
+			VAR _d = MAX ( fact_inventory_daily[date_key] )
+			RETURN
+			    SUMX (
+			        FILTER ( fact_inventory_daily, fact_inventory_daily[date_key] = _d ),
+			        fact_inventory_daily[on_hand_qty] * RELATED ( dim_product[unit_cost] )
+			    )
 		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: 265b5b74-0a46-43aa-b126-383545b95db8
 
@@ -57,8 +62,8 @@ table _Measures
 	measure 'Inventory Value vs PY (SLOW)' =
 			
 			DIVIDE (
-			    CALCULATE ( SUMX ( fact_inventory_daily, fact_inventory_daily[on_hand_qty] * RELATED ( dim_product[unit_cost] ) ), DATEADD ( dim_date[date], -1, YEAR ) ),
-			    CALCULATE ( SUMX ( fact_inventory_daily, fact_inventory_daily[on_hand_qty] * RELATED ( dim_product[unit_cost] ) ) )
+			    CALCULATE ( [Inventory Value (SLOW)], DATEADD ( dim_date[date], -1, YEAR ) ),
+			    [Inventory Value (SLOW)]
 			) - 1
 		formatString: \$#,0;(\$#,0);\$#,0
 		lineageTag: 23ba8297-b9c6-40ba-aa16-06404022e66a

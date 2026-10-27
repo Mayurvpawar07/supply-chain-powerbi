@@ -4,7 +4,7 @@
   "position": {
     "x": 960,
     "y": 72,
-    "z": 5,
+    "z": 5000,
     "height": 104,
     "width": 296,
     "tabOrder": 5000
@@ -52,23 +52,5 @@
       }
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "1a263bfbcac2d1452070",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Spend"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

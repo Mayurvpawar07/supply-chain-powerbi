@@ -4,7 +4,7 @@
   "position": {
     "x": 336,
     "y": 72,
-    "z": 3,
+    "z": 3000,
     "height": 104,
     "width": 296,
     "tabOrder": 3000
@@ -52,23 +52,5 @@
       }
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "00b7266e15a0ca8c7a4c",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "On-Time %"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

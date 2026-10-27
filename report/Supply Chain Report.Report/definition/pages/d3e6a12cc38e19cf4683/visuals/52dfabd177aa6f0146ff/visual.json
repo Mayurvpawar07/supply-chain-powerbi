@@ -4,7 +4,7 @@
   "position": {
     "x": 800,
     "y": 192,
-    "z": 9,
+    "z": 9000,
     "height": 280,
     "width": 456,
     "tabOrder": 9000
@@ -85,38 +85,34 @@
         }
       ]
     },
+    "visualContainerObjects": {
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'OTIF % by supplier country'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "53f07662c29c36d92b8f",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_supplier"
-              }
-            },
-            "Property": "country"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "b510561d971eb1a903b1",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "OTIF %"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

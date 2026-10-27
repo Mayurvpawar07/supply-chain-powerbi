@@ -15,15 +15,20 @@ DIVIDE (
     [PO Lines]
 )
 Spend = SUMX ( fact_po_lines, fact_po_lines[qty_received] * fact_po_lines[unit_cost] )
-Inventory Value = SUM ( fact_inventory_daily[on_hand_value] )
+// Snapshot (semi-additive): value on the latest snapshot date in the current filter context
+Inventory Value =
+VAR _d = MAX ( fact_inventory_daily[date_key] )
+RETURN CALCULATE ( SUM ( fact_inventory_daily[on_hand_value] ), fact_inventory_daily[date_key] = _d )
 
 // ---------- BEFORE (SLOW) ----------
 // Row-by-row iterator + RELATED over a multi-million row table
 Inventory Value (SLOW) =
-SUMX (
-    fact_inventory_daily,
-    fact_inventory_daily[on_hand_qty] * RELATED ( dim_product[unit_cost] )
-)
+VAR _d = MAX ( fact_inventory_daily[date_key] )
+RETURN
+    SUMX (
+        FILTER ( fact_inventory_daily, fact_inventory_daily[date_key] = _d ),
+        fact_inventory_daily[on_hand_qty] * RELATED ( dim_product[unit_cost] )
+    )
 
 // FILTER over the whole fact table instead of a column predicate
 OTIF % (SLOW) =
@@ -41,8 +46,8 @@ DIVIDE (
 // Repeated sub-expressions, no variables
 Inventory Value vs PY (SLOW) =
 DIVIDE (
-    CALCULATE ( SUMX ( fact_inventory_daily, fact_inventory_daily[on_hand_qty] * RELATED ( dim_product[unit_cost] ) ), DATEADD ( dim_date[date], -1, YEAR ) ),
-    CALCULATE ( SUMX ( fact_inventory_daily, fact_inventory_daily[on_hand_qty] * RELATED ( dim_product[unit_cost] ) ) )
+    CALCULATE ( [Inventory Value (SLOW)], DATEADD ( dim_date[date], -1, YEAR ) ),
+    [Inventory Value (SLOW)]
 ) - 1
 
 // ---------- AFTER (FAST) ----------

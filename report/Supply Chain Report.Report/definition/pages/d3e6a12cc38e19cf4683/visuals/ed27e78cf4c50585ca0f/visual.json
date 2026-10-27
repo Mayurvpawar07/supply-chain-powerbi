@@ -4,7 +4,7 @@
   "position": {
     "x": 24,
     "y": 72,
-    "z": 2,
+    "z": 2000,
     "height": 104,
     "width": 296,
     "tabOrder": 2000
@@ -52,23 +52,5 @@
       }
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "1ca1a4dc811104bf4037",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "OTIF %"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

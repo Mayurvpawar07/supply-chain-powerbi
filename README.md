@@ -9,7 +9,7 @@ DAX/model performance tuning, and Git-based delivery.
 ## What's in the repo
 | Path | Purpose |
 |---|---|
-| `data/generate_data.py` | Builds the star schema CSVs (3M-row inventory fact by default) |
+| `data/generate_data.py` | Builds the star schema CSVs (weekly inventory snapshots, about 1.8M rows by default) |
 | `theme/portfolio-theme.json` | Report theme (import via View > Themes > Browse for themes) |
 | `dax/measures.dax` | Core measures plus SLOW (before) / FAST (after) variants |
 | `docs/DESIGN_SPEC.md` | Page layout, grid, visual choices and why |

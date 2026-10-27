@@ -11,4 +11,4 @@ jobs:
       - name: Validate theme, measures, repo hygiene
         run: python tools/validate.py
       - name: Data generator smoke test
-        run: python data/generate_data.py --inventory-rows 5000 --po-lines 2000
+        run: python data/generate_data.py --products 40 --po-lines 3000

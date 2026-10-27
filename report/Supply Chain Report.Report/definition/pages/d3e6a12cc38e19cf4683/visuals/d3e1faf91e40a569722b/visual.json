@@ -4,7 +4,7 @@
   "position": {
     "x": 1016,
     "y": 20,
-    "z": 6,
+    "z": 6000,
     "height": 36,
     "width": 240,
     "tabOrder": 6000
@@ -52,26 +52,21 @@
         {
           "properties": {}
         }
+      ],
+      "header": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Location'"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "f2c1f695493a3012e5ef",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_location"
-              }
-            },
-            "Property": "location_name"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }
