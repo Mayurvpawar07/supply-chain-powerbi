@@ -65,7 +65,7 @@ table _Measures
 			    CALCULATE ( [Inventory Value (SLOW)], DATEADD ( dim_date[date], -1, YEAR ) ),
 			    [Inventory Value (SLOW)]
 			) - 1
-		formatString: \$#,0;(\$#,0);\$#,0
+		formatString: #,0.0%;-#,0.0%;#,0.0%
 		lineageTag: 23ba8297-b9c6-40ba-aa16-06404022e66a
 
 	measure 'Inventory Value vs PY' =
