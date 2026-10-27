@@ -73,7 +73,7 @@ table _Measures
 			VAR _cur = [Inventory Value]
 			VAR _py  = CALCULATE ( [Inventory Value], DATEADD ( dim_date[date], -1, YEAR ) )
 			RETURN DIVIDE ( _cur, _py ) - 1
-		formatString: \$#,0;(\$#,0);\$#,0
+		formatString: #,0.0%;-#,0.0%;#,0.0%
 		lineageTag: 1f7ffe28-53fb-4b6f-8dd5-863681257a5e
 
 	measure 'Late Lines' = [PO Lines] - SUM ( fact_po_lines[is_on_time] )
@@ -83,6 +83,16 @@ table _Measures
 	measure 'Short Lines' = [PO Lines] - SUM ( fact_po_lines[is_in_full] )
 		formatString: 0
 		lineageTag: 5656b2de-6504-42fe-a474-8eaa8be02fd8
+
+	measure 'A-Class Share' = ```
+			
+			   DIVIDE (
+			       CALCULATE ( [Inventory Value], dim_product[abc_class] = "A" ),
+			       [Inventory Value]
+			   )
+			```
+		formatString: 0%;-0%;0%
+		lineageTag: aaff9827-81b5-4e9a-bb48-8d5240b4c712
 
 	column Column1
 		dataType: string

@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
   "name": "7b0a4ac26df1d39b9216",
   "position": {
-    "x": 24,
-    "y": 472,
+    "x": 32,
+    "y": 480,
     "z": 0,
-    "height": 264,
-    "width": 600,
+    "height": 224,
+    "width": 592.00000000000011,
     "tabOrder": 0
   },
   "visual": {
@@ -76,65 +76,5 @@
       }
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "41b33ef0f8c62a0fb200",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_location"
-              }
-            },
-            "Property": "location_name"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "75f4dae0784c362c5e7e",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "PO Lines"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "f12f52fc8d8d48af351d",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "OTIF %"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "3ec3b66ee7a335b4e11a",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Spend"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

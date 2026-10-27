@@ -58,3 +58,9 @@ Inventory Value vs PY =
 VAR _cur = [Inventory Value]
 VAR _py  = CALCULATE ( [Inventory Value], DATEADD ( dim_date[date], -1, YEAR ) )
 RETURN DIVIDE ( _cur, _py ) - 1
+
+A-Class Share =
+   DIVIDE (
+       CALCULATE ( [Inventory Value], dim_product[abc_class] = "A" ),
+       [Inventory Value]
+   )

@@ -4,10 +4,10 @@
   "position": {
     "x": 640,
     "y": 72,
-    "z": 4,
+    "z": 4000,
     "height": 360,
     "width": 616,
-    "tabOrder": 4
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "scatterChart",
@@ -140,65 +140,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "03016e2d058e8871429b",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_supplier"
-              }
-            },
-            "Property": "supplier_name"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "312a64b04257e3227693",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "dim_supplier"
-              }
-            },
-            "Property": "country"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "a654fc7e74b4c62b03aa",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Spend"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "0d04d019616bde886abf",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "OTIF %"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

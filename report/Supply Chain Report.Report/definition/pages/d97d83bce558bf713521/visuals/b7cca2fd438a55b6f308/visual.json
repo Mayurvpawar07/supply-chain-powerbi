@@ -4,10 +4,10 @@
   "position": {
     "x": 24,
     "y": 72,
-    "z": 3,
+    "z": 3000,
     "height": 360,
     "width": 600,
-    "tabOrder": 3
+    "tabOrder": 3000
   },
   "visual": {
     "visualType": "barChart",
@@ -216,20 +216,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "bf3902a87ba59d14ac7d",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "OTIF %"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }
