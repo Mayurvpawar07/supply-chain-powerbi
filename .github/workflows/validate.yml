@@ -12,3 +12,7 @@ jobs:
         run: python tools/validate.py
       - name: Data generator smoke test
         run: python data/generate_data.py --products 40 --po-lines 3000
+      - name: SQL analysis checks (SQLite vs pandas)
+        run: |
+          python data/generate_data.py --products 100 --po-lines 30000
+          python tools/test_sql.py
