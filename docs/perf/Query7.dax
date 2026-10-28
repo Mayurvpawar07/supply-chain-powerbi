@@ -1,0 +1,5 @@
+﻿// DAX Query
+EVALUATE
+	ROW(
+	"Inventory_Value_vs_PY", '_Measures'[Inventory Value vs PY]
+)

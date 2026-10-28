@@ -1,0 +1,20 @@
+﻿// DAX Query
+DEFINE
+	VAR __DS0Core = 
+		SUMMARIZECOLUMNS('dim_date'[year_month], "OTIF____SLOW_", '_Measures'[OTIF % (SLOW)])
+
+	VAR __DS0IntersectionCount = CALCULATE(COUNTROWS(__DS0Core))
+
+	VAR __DS0BodyBinnedSample = 
+		SAMPLEAXISWITHLOCALMINMAX(3500, __DS0Core, 'dim_date'[year_month], [OTIF____SLOW_], 350, , ALPHABETICAL, ASC, 105000, 60)
+
+EVALUATE
+	ROW(
+	"DS0IntersectionCount", __DS0IntersectionCount
+)
+
+EVALUATE
+	__DS0BodyBinnedSample
+
+ORDER BY
+	'dim_date'[year_month]

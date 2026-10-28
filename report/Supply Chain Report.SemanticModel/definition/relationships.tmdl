@@ -26,13 +26,3 @@ relationship 154c762d-2acb-f8d6-c4dd-3650f63941a3
 	fromColumn: fact_po_lines.order_date_key
 	toColumn: dim_date.date_key
 
-relationship 19fe25d3-ef2c-8993-cbe1-bda2ceb7f097
-	isActive: false
-	fromColumn: fact_po_lines.promised_date_key
-	toColumn: dim_date.date_key
-
-relationship fba8856e-a901-8698-c28e-6a5f791db3f1
-	isActive: false
-	fromColumn: fact_po_lines.received_date_key
-	toColumn: dim_date.date_key
-

@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "_Measures.Inventory Value (SLOW)",
-              "nativeQueryRef": "Inventory Value (SLOW)"
+              "nativeQueryRef": "Inventory Value (SLOW)",
+              "format": "\\$#,0.0;-\\$#,0.0;\\$#,0.0"
             }
           ]
         }

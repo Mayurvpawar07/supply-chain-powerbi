@@ -37,15 +37,6 @@ table fact_inventory_daily
 
 		annotation SummarizationSetBy = Automatic
 
-	column on_hand_qty
-		dataType: int64
-		formatString: 0
-		lineageTag: 2a2bd99c-0f78-4f6d-8801-aeb59981c97c
-		summarizeBy: sum
-		sourceColumn: on_hand_qty
-
-		annotation SummarizationSetBy = Automatic
-
 	column on_hand_value
 		dataType: double
 		isHidden
@@ -65,9 +56,10 @@ table fact_inventory_daily
 				let
 				  Source = Csv.Document(File.Contents("D:\Project\supply-chain-powerbi\supply-chain-powerbi\data\out\fact_inventory_daily.csv"), [Delimiter = ",", Columns = 5, QuoteStyle = QuoteStyle.None]),
 				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
-				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"date_key", Int64.Type}, {"product_key", Int64.Type}, {"location_key", Int64.Type}, {"on_hand_qty", Int64.Type}, {"on_hand_value", type number}}, "en-US")
+				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"date_key", Int64.Type}, {"product_key", Int64.Type}, {"location_key", Int64.Type}, {"on_hand_qty", Int64.Type}, {"on_hand_value", type number}}, "en-US"),
+				  #"Removed columns" = Table.RemoveColumns(#"Changed column type", {"on_hand_qty"})
 				in
-				  #"Changed column type"
+				  #"Removed columns"
 
 	annotation PBI_ResultType = Table
 

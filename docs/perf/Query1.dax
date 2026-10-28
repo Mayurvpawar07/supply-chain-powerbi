@@ -1,0 +1,62 @@
+﻿// DAX Query
+DEFINE
+	VAR __DS0Core = 
+		SUMMARIZECOLUMNS(
+			'dim_product'[category],
+			ROLLUPADDISSUBTOTAL('dim_product'[abc_class], "IsGrandTotalColumnTotal"),
+			"Inventory_Value__SLOW_", '_Measures'[Inventory Value (SLOW)]
+		)
+
+	VAR __DS0CoreOnlyOutputTotals = 
+		SELECTCOLUMNS(
+			KEEPFILTERS(FILTER(KEEPFILTERS(__DS0Core), [IsGrandTotalColumnTotal] = FALSE)),
+			"'dim_product'[category]", 'dim_product'[category],
+			"'dim_product'[abc_class]", 'dim_product'[abc_class],
+			"Inventory_Value__SLOW_", [Inventory_Value__SLOW_]
+		)
+
+	VAR __DS0CoreTableByDM0 = 
+		SELECTCOLUMNS(
+			KEEPFILTERS(FILTER(KEEPFILTERS(__DS0Core), [IsGrandTotalColumnTotal] = TRUE)),
+			"'dim_product'[category]", 'dim_product'[category],
+			"SortBy_DM0_0", [Inventory_Value__SLOW_]
+		)
+
+	VAR __DS0PrimaryWithSortColumns = 
+		NATURALLEFTOUTERJOIN(
+			SUMMARIZE(__DS0Core, 'dim_product'[category]),
+			__DS0CoreTableByDM0
+		)
+
+	VAR __DS0PrimaryWindowed = 
+		TOPN(201, __DS0PrimaryWithSortColumns, [SortBy_DM0_0], 0, 'dim_product'[category], 1)
+
+	VAR __DS0SecondaryBase = 
+		SUMMARIZE(__DS0CoreOnlyOutputTotals, 'dim_product'[abc_class])
+
+	VAR __DS0Secondary = 
+		TOPN(62, __DS0SecondaryBase, 'dim_product'[abc_class], 1)
+
+	VAR __DS0BodyLimited = 
+		NATURALLEFTOUTERJOIN(
+			__DS0PrimaryWindowed,
+			SUBSTITUTEWITHINDEX(
+				__DS0CoreOnlyOutputTotals,
+				"ColumnIndex",
+				__DS0Secondary,
+				'dim_product'[abc_class],
+				ASC
+			)
+		)
+
+EVALUATE
+	__DS0Secondary
+
+ORDER BY
+	'dim_product'[abc_class]
+
+EVALUATE
+	__DS0BodyLimited
+
+ORDER BY
+	[SortBy_DM0_0] DESC, 'dim_product'[category], [ColumnIndex]
