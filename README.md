@@ -14,6 +14,9 @@ DAX/model performance tuning, and Git-based delivery.
 | `dax/measures.dax` | Core measures plus SLOW (before) / FAST (after) variants |
 | `docs/DESIGN_SPEC.md` | Page layout, grid, visual choices and why |
 | `docs/TUNING_LOG.md` | Before/after performance measurements |
+| `sql/analysis.sql` | Four analytical queries: CTEs, window functions, rolling and YoY logic, gaps-and-islands |
+| `tools/test_sql.py` | Checks each query against an independent pandas calculation |
+| `docs/SQL_ANALYSIS.md` | What each query answers and the SQL techniques used |
 | `docs/CICD.md` | How changes are validated and promoted |
 | `report/` | The `.pbip` project (report + semantic model as text files) |
 | `.github/workflows/validate.yml` | CI checks on every push |
