@@ -54,7 +54,7 @@ table fact_inventory_daily
 		mode: import
 		source =
 				let
-				  Source = Csv.Document(File.Contents("D:\Project\supply-chain-powerbi\supply-chain-powerbi\data\out\fact_inventory_daily.csv"), [Delimiter = ",", Columns = 5, QuoteStyle = QuoteStyle.None]),
+				  Source = Csv.Document(File.Contents(DataFolder & "fact_inventory_daily.csv"), [Delimiter = ",", Columns = 5, QuoteStyle = QuoteStyle.None]),
 				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
 				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"date_key", Int64.Type}, {"product_key", Int64.Type}, {"location_key", Int64.Type}, {"on_hand_qty", Int64.Type}, {"on_hand_value", type number}}, "en-US"),
 				  #"Removed columns" = Table.RemoveColumns(#"Changed column type", {"on_hand_qty"})

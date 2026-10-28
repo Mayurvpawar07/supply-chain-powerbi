@@ -117,7 +117,7 @@ table fact_po_lines
 		mode: import
 		source =
 				let
-				  Source = Csv.Document(File.Contents("D:\Project\supply-chain-powerbi\supply-chain-powerbi\data\out\fact_po_lines.csv"), [Delimiter = ",", Columns = 13, QuoteStyle = QuoteStyle.None]),
+				  Source = Csv.Document(File.Contents(DataFolder & "fact_po_lines.csv"), [Delimiter = ",", Columns = 13, QuoteStyle = QuoteStyle.None]),
 				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
 				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"po_line_id", Int64.Type}, {"po_id", Int64.Type}, {"product_key", Int64.Type}, {"supplier_key", Int64.Type}, {"location_key", Int64.Type}, {"order_date_key", Int64.Type}, {"promised_date_key", Int64.Type}, {"received_date_key", Int64.Type}, {"qty_ordered", Int64.Type}, {"qty_received", Int64.Type}, {"unit_cost", type number}, {"is_on_time", Int64.Type}, {"is_in_full", Int64.Type}}, "en-US"),
 				  #"Removed columns" = Table.RemoveColumns(#"Changed column type", {"po_line_id", "promised_date_key", "received_date_key"})

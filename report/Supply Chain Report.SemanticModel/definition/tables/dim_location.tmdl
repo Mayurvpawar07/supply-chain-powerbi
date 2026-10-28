@@ -33,7 +33,7 @@ table dim_location
 		mode: import
 		source =
 				let
-				  Source = Csv.Document(File.Contents("D:\Project\supply-chain-powerbi\supply-chain-powerbi\data\out\dim_location.csv"), [Delimiter = ",", Columns = 3, QuoteStyle = QuoteStyle.None]),
+				  Source = Csv.Document(File.Contents(DataFolder & "dim_location.csv"), [Delimiter = ",", Columns = 3, QuoteStyle = QuoteStyle.None]),
 				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
 				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"location_key", Int64.Type}, {"location_name", type text}, {"location_type", type text}}, "en-US")
 				in

@@ -54,7 +54,7 @@ table dim_product
 		mode: import
 		source =
 				let
-				  Source = Csv.Document(File.Contents("D:\Project\supply-chain-powerbi\supply-chain-powerbi\data\out\dim_product.csv"), [Delimiter = ",", Columns = 5, QuoteStyle = QuoteStyle.None]),
+				  Source = Csv.Document(File.Contents(DataFolder & "dim_product.csv"), [Delimiter = ",", Columns = 5, QuoteStyle = QuoteStyle.None]),
 				  #"Promoted headers" = Table.PromoteHeaders(Source, [PromoteAllScalars = true]),
 				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"product_key", Int64.Type}, {"sku", type text}, {"category", type text}, {"unit_cost", type number}, {"abc_class", type text}}, "en-US")
 				in

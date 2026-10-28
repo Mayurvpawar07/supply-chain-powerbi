@@ -1,0 +1,5 @@
+expression DataFolder = "D:\Project\supply-chain-powerbi\supply-chain-powerbi\data\out\" meta [IsParameterQuery = true, IsParameterQueryRequired = true, Type = type text]
+	lineageTag: f100361c-185e-4e60-9900-f3b164ba80a8
+
+	annotation PBI_ResultType = Text
+
